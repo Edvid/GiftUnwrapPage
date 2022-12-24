@@ -4,4 +4,4 @@ leftPaper = document.querySelector(".leftPaper");
 rightPaper = document.querySelector(".rightPaper");
 toReveal = document.querySelector(".toReveal");
 
-toReveal.src = window.location.search.get('img');
+toReveal.src = new URLSearchParams(window.location.search).get('img')
