@@ -27,12 +27,11 @@ function startDrag(e) {
     // IE uses srcElement, others use target
     targ = e.target ? e.target : e.srcElement;
 
-    console.log(targ.classList);
     if (!~Array.from(targ.classList).indexOf('dragme')) {return};
     // calculate event X, Y coordinates
-        offsetX = e.clientX;
-        offsetY = e.clientY;
-
+    offsetX = e.clientX ? e.clientX : e.touches[0].clientX;
+    offsetY = e.clientY ? e.clientY : e.touches[0].clientY;
+    
     // assign default values for top and left properties
     if(!targ.style.left) { targ.style.left='0px'};
     if (!targ.style.top) { targ.style.top='0px'};
@@ -42,9 +41,10 @@ function startDrag(e) {
     coordX = parseInt(targ.style.left);
     coordY = parseInt(targ.style.top);
     drag = true;
-
+    
     // move div element
         document.onmousemove=dragDiv;
+        document.touchmove=dragDiv;
     return false;
 
 }
@@ -62,5 +62,8 @@ function stopDrag() {
 }
 window.onload = function() {
     document.onmousedown = startDrag;
-    document.onmouseup = stopDrag;
+    document.onmouseup   = stopDrag;
+
+    document.addEventListener('touchstart', startDrag);
+    document.addEventListener('touchend', stopDrag);
 }
