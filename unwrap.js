@@ -65,9 +65,9 @@ function stopDrag() {
     drag=false;
 }
 window.onload = function() {
-    document.addEventListener('mousedown', startDrag);
+    document.addEventListener('mousedown', startDrag, {passive: false});
     document.addEventListener('mouseup', stopDrag);
 
-    document.addEventListener('touchstart', startDrag);
+    document.addEventListener('touchstart', startDrag, {passive: false});
     document.addEventListener('touchend', stopDrag);
 }
