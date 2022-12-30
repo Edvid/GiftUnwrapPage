@@ -1,10 +1,19 @@
+let paperID = "default";
 let leftPaper, rightPaper, toReveal;
+
+let URLpid = new URLSearchParams(window.location.search).get('pid');
+
+if(URLpid != null)
+    paperID = URLpid;
 
 leftPaper = document.querySelector(".leftPaper");
 rightPaper = document.querySelector(".rightPaper");
 toReveal = document.querySelector(".toReveal");
 
 toReveal.src = new URLSearchParams(window.location.search).get('img');
+
+leftPaper.src  = `leftPaper_${paperID}.png`; 
+rightPaper.src = `rightPaper_${paperID}.png`; 
 
 //down from here is stolen code from Gigy on https://stackoverflow.com/questions/17992543/how-do-i-drag-an-image-smoothly-around-the-screen-using-pure-javascript
 
