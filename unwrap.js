@@ -42,7 +42,7 @@ function startDrag(e) {
     coordY = parseInt(targ.style.top);
     drag = true;
     // move div element
-    document.onmousemove=dragDiv;
+    document.addEventListener('mousemove', dragDiv);
     document.addEventListener('touchmove', dragDiv);
     
     return false;
@@ -65,8 +65,8 @@ function stopDrag() {
     drag=false;
 }
 window.onload = function() {
-    document.onmousedown = startDrag;
-    document.onmouseup   = stopDrag;
+    document.addEventListener('mousedown', startDrag);
+    document.addEventListener('mouseup', stopDrag);
 
     document.addEventListener('touchstart', startDrag);
     document.addEventListener('touchend', stopDrag);
