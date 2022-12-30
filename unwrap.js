@@ -41,10 +41,10 @@ function startDrag(e) {
     coordX = parseInt(targ.style.left);
     coordY = parseInt(targ.style.top);
     drag = true;
-    
     // move div element
-        document.onmousemove=dragDiv;
-        document.touchmove=dragDiv;
+    document.onmousemove=dragDiv;
+    document.addEventListener('touchmove', dragDiv);
+    
     return false;
 
 }
@@ -53,8 +53,12 @@ function dragDiv(e) {
     if (!e) { var e= window.event};
     // var targ=e.target?e.target:e.srcElement;
     // move div element
-    targ.style.left=coordX+e.clientX-offsetX+'px';
-    targ.style.top=coordY+e.clientY-offsetY+'px';
+
+    
+    const currentX = e.clientX ? e.clientX : e.touches[0].clientX;
+    const currentY = e.clientY ? e.clientY : e.touches[0].clientY;
+    targ.style.left = coordX + currentX - offsetX + 'px';
+    targ.style.top  = coordY + currentY - offsetY + 'px';
     return false;
 }
 function stopDrag() {
